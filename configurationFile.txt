@@ -1,0 +1,40 @@
+configFile=`pwd`/configurationFile.txt
+
+user=ee699@nyu.edu
+
+REF_genome_file_name=/gpfs/home/ee699/CSHL/hg19.fa
+
+window=200
+
+experiment='CTCF'
+
+OutputLogs=`pwd`/${experiment}_OutputLog
+ErrorLogs=`pwd`/${experiment}_ErrorLog
+
+data_path=/gpfs/scratch/ee699/CSHL/${experiment}
+
+# positive samples (ChIPSeq)
+pos_filename='ENCFF963PJY.bed.gz'   
+# negative samples (DNASESeq(
+neg_filename='ENCFF235KUD.bed.gz'
+# reference genome
+genome_filename=/gpfs/home/ee699/CSHL/hg19.fa
+
+file_name=${experiment}_${window}.h5
+
+# Resource Allocations:
+process_classification_Path=process_classification_dataset.s
+process_classification_time=0-4
+process_classification_mem=100GB
+
+build_network_Path=analyze_classification_dataset0.s
+build_network_time=0-4
+build_network_mem=300GB
+
+eval_network_Path=analyze_classification_dataset1.s
+eval_network_time=0-4
+eval_network_mem=100GB
+
+train_eval_network_Path=module_2.s
+train_eval_network_time=0-4
+train_eval_network_mem=100GB
