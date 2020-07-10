@@ -134,7 +134,7 @@ auroc = keras.metrics.AUC(curve='ROC', name='auroc')
 aupr = keras.metrics.AUC(curve='PR', name='aupr')
 optimizer = keras.optimizers.Adam(learning_rate=0.001)
 try:
-    parallel_model = keras.utils.multi_gpu_model(model,gpus=4,cpu_relocation=True)
+    parallel_model = keras.utils.multi_gpu_model(model,gpus=1,cpu_relocation=True)
     print("Training using multiple GPUs..")
 except ValueError:
     parallel_model = model
@@ -176,21 +176,12 @@ parallel_model.save_weights(model_path)
 
 model=parallel_model
 print(model.summary())
-#intermediate_tmp = keras.Model(inputs=model.inputs, outputs=model.layers[3].output)
-#print("Intermediate tmp 1")
-#print(intermediate_tmp.summary())
+intermediate_tmp = keras.Model(inputs=model.inputs, outputs=model.layers[3].output)
+print("Intermediate tmp 1")
+print(intermediate_tmp.summary())
 results = model.evaluate(x_test, y_test, batch_size=128)
 print('test loss, test results:', results)
 
-#model=model.layers[-2]
-#model.compile(optimizer,loss)
-#print(model.summary())
-#model.save_weights(model_path)
-#intermediate_tmp = keras.Model(inputs=model.inputs, outputs=model.layers[3].output)
-#print("Intermediate tmp 2")
-#print(intermediate_tmp.summary())
-#results = intermediate_tmp.evaluate(x_test, y_test, batch_size=128)
-#print('test loss, test results:', results)
 
 
 import pandas as pd
