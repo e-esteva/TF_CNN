@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=gpu4_dev
 #SBATCH --nodes=1
-#SBATCH --gres=gpu:4
+#SBATCH --gres=gpu:1
 #SBATCH --tasks-per-node=1
 #SBATCH --job-name=analyize_classification_0
 #SBATCH --output=analyze_classifcation.o%j
