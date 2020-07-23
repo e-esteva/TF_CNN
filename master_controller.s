@@ -50,6 +50,7 @@ function train_eval_network_module {
 source configurationFile.txt
 
 mkdir -p ${data_path}
+mkdir -p ${data_path}/Top_Predictions/
 mkdir -p $OutputLogs
 mkdir -p $ErrorLogs
 
