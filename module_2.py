@@ -196,7 +196,7 @@ import matplotlib.pyplot as plt
 import tensorflow.compat.v1.keras.backend as K1
 
 
-def plot_filers(model, x_test, layer=3, threshold=0.5, window=20, num_cols=8, figsize=(30,5)):
+def plot_filters(model, x_test, layer=3, threshold=0.5, window=20, num_cols=8, figsize=(30,5)):
 
     intermediate = keras.Model(inputs=model.inputs, outputs=model.layers[layer].output)
     fmap = intermediate.predict(x_test)
@@ -448,10 +448,15 @@ for i in range(len(X)):
     plt.xticks([])
     plt.yticks([])
     fig = plt.gcf()
+    fig.savefig(str(data_path)+'/Top_Predictions/'+str(i))
 
-
-fig, W, logo = plot_filers(model, x_test, layer=3, threshold=0.5, 
+fig, W, logo = plot_filters(model, x_test, layer=3, threshold=0.5, 
                                     window=20, num_cols=8, figsize=(30,5))
+
+# save plots:
+fig.savefig(str(data_path)+'/TopPredictionScoreSequences.jpg')
+plt.close()
+
 
 # generate meme file
 W_clipped = clip_filters(W, threshold=0.5, pad=3)
